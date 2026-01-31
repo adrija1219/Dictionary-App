@@ -13,11 +13,14 @@
 
 [data-theme="dark"] {
     /* Dark Mode - Deep Pink/Berry Palette */
-    --bg-body: #55051e;       /* Darkened for better contrast */
-    --bg-sidebar: #a8034d;   /* Deep berry sidebar */
+    --bg-body: #55051e;
+    /* Darkened for better contrast */
+    --bg-sidebar: #a8034d;
+    /* Deep berry sidebar */
     --bg-card: #632534;
     --text-main: #f8fafc;
-    --text-sub: #fdfbfc;     /* Lightened sub-text for readability */
+    --text-sub: #fdfbfc;
+    /* Lightened sub-text for readability */
     --border: #8b3a55;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     --btn-hover: #f17db7;
@@ -47,22 +50,66 @@ body {
 /* Sidebar */
 .sidebar {
     width: 260px;
-    background: var(--bg-sidebar); /* FIXED: Added var() here */
+    background: var(--bg-sidebar);
     border-right: 1px solid var(--border);
     padding: 30px;
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    transition: 0.3s ease-in-out;
+    z-index: 1000;
 }
 
 .logo {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: 800;
     color: var(--accent);
-    margin-bottom: 50px;
+
 }
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Hide menu button on desktop */
+.menu-toggle {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* When sidebar is expanded */
+.sidebar.active {
+    left: 0;
+}
+
+/* Dark overlay when menu is open */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display:none;
+}
+
+.overlay.active {
+    display: block;
+}
+
 
 .menu-item {
     padding: 12px;
@@ -77,7 +124,8 @@ body {
 
 .menu-item.active,
 .menu-item:hover {
-    background: var(--accent); /* Unified with your accent color */
+    background: var(--accent);
+    /* Unified with your accent color */
     color: white;
 }
 
@@ -101,6 +149,7 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
+    padding: 10px 20px;
 }
 
 /* Theme Toggle */
@@ -108,6 +157,7 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-right: 20px;
 }
 
 .toggle-bg {
@@ -148,7 +198,8 @@ header {
     padding: 10px;
     border-radius: 25px;
     box-shadow: var(--shadow);
-    border: 1px solid var(--border); /* Standardized border */
+    border: 1px solid var(--border);
+    /* Standardized border */
     margin-top: 20px;
 }
 
@@ -177,10 +228,10 @@ header {
     background: var(--btn-hover);
 }
 
-.placeholder-text{
+.placeholder-text {
     display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     font-size: larger;
     color: rgb(192, 182, 182);
 }
@@ -218,11 +269,13 @@ header {
     height: 50px;
     border-radius: 50%;
     border: none;
-    background: rgba(233, 58, 160, 0.1); /* Uses your pink accent with transparency */
+    background: rgba(233, 58, 160, 0.1);
+    /* Uses your pink accent with transparency */
     color: var(--accent);
     cursor: pointer;
     font-size: 20px;
 }
+
 .history-section {
     padding: 20px;
     animation: fadeIn 0.3s ease;
@@ -242,13 +295,13 @@ header {
 }
 
 .history-item {
-    background: var(--card-bg, #ffffff);
+    background: var(--card-bg, #fa8fb8);
     padding: 15px 20px;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     cursor: pointer;
     transition: transform 0.2s;
 }
@@ -260,12 +313,13 @@ header {
 .history-item .word {
     font-weight: bold;
     font-size: 1.1rem;
+    color: rgb(253, 39, 146);
     text-transform: capitalize;
 }
 
 .history-item .timestamp {
     font-size: 0.8rem;
-    color: #888;
+    color: #494949;
 }
 
 .clear-btn {
@@ -277,13 +331,83 @@ header {
     cursor: pointer;
 }
 
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
+
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column; /* Stack content and nav */
+    }
+
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px; /* Fixed height for bottom bar */
+        flex-direction: row; /* Items side-by-side */
+        padding: 0;
+        margin: 0;
+        border-right: none;
+        border-top: 1px solid var(--border);
+        justify-content: space-around;
+        z-index: 2000;
+    }
+
+    .sidebar .menu {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .menu-item {
+        flex-direction: column; /* Icon on top of text */
+        gap: 4px;
+        font-size: 10px; /* Smaller text for mobile */
+        padding: 10px;
+        margin: 0;
+        flex: 1;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .menu-item i {
+        font-size: 1.2rem;
+    }
+
+    .content {
+        padding: 15px;
+        padding-bottom: 80px; /* Space so bottom bar doesn't cover content */
+        height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+
+    /* Hide the hamburger button since we don't need to toggle anymore */
+    .menu-toggle {
+        display: none !important;
+    }
+
+    /* Adjust Header for Mobile */
+    header {
+        margin-bottom: 20px;
+        padding: 10px 5px;
+    }
+
+    .logo span {
+        font-size: 22px; /* Smaller logo for mobile */
+    }
+}
+
+
