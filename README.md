@@ -52,4 +52,8 @@ The app uses a Mobile-First approach:
 * **Dark Mode:** Deep berry and burgundy tones for comfortable night-time reading.
 
 ## Live URL: 
+   https://adrija1219.github.io/Dictionary-App/
+
+## Preview:
+<img width="1343" height="587" alt="image" src="https://github.com/user-attachments/assets/c8b92568-2d5c-4389-9390-6ab951193b12" />
 
